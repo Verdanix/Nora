@@ -142,6 +142,7 @@ public class SttEngineFactory {
   public void registerEngine(String engineName, Supplier<SttEngine> engine) {
     Objects.requireNonNull(engineName, "engineName cannot be null");
     Objects.requireNonNull(engine, "engine supplier cannot be null");
+    engineName = engineName.toLowerCase();
 
     this.logger.debug("Registering engine \"{}\".", engineName);
     this.ENGINE_SUPPLIERS.compute(engineName, (key, existing) -> engine);
@@ -186,7 +187,8 @@ public class SttEngineFactory {
             () -> {
               try {
                 logger.debug("Getting engine \"{}\" asynchronously.", engineName);
-                return Optional.of(getEngine(engineName, model, sampleRate, sampleSize, channels));
+                return Optional.of(
+                    this.getEngine(engineName, model, sampleRate, sampleSize, channels));
               } catch (Exception e) {
                 logger.error("Failed to get engine: {}", e.getMessage(), e);
                 throw new CompletionException(e);
@@ -233,9 +235,11 @@ public class SttEngineFactory {
   public SttEngine getEngine(
       String engineName, String model, float sampleRate, int sampleSize, int channels)
       throws IOException, LineUnavailableException, IllegalArgumentException {
-    Objects.requireNonNull(engineName, "engineName cannot be null");
-    Supplier<SttEngine> factory = this.ENGINE_SUPPLIERS.get(engineName);
 
+    Objects.requireNonNull(engineName, "engineName cannot be null");
+    engineName = engineName.toLowerCase();
+
+    Supplier<SttEngine> factory = this.ENGINE_SUPPLIERS.get(engineName);
     this.logger.debug("SttEngine null check: {}", factory == null);
     if (factory == null) {
       this.logger.error("Engine not found: {}", engineName);
