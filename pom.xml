@@ -10,6 +10,9 @@
     <groupId>org.acadrix</groupId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>nora-logging</module>
+    </modules>
 
     <developers>
         <developer>
@@ -38,39 +41,37 @@
         <git-code-format-maven-plugin.version>5.3</git-code-format-maven-plugin.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- Unit Testing Dependencies -->
-            <!-- Documentation: https://junit.org/junit5/docs/current/user-guide/ -->
-            <!-- Github: https://github.com/junit-team/junit5 -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit.jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
+    <dependencies>
+        <!-- Unit Testing Dependencies -->
+        <!-- Documentation: https://junit.org/junit5/docs/current/user-guide/ -->
+        <!-- Github: https://github.com/junit-team/junit5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-            <!-- Mocking Junit Support -->
-            <!-- Documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/index.html -->
-            <!-- Github: https://github.com/mockito/mockito -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-junit-jupiter</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
+        <!-- Mocking Junit Support -->
+        <!-- Documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/index.html -->
+        <!-- Github: https://github.com/mockito/mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-            <!-- Lombok -->
-            <!-- Documentation: https://projectlombok.org/features/all -->
-            <!-- Github: https://github.com/rzwitserloot/lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <!-- Lombok -->
+        <!-- Documentation: https://projectlombok.org/features/all -->
+        <!-- Github: https://github.com/rzwitserloot/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
