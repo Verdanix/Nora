@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>NoraLogging</name>
+    <description>STT module for Nora</description>
+    <artifactId>NoraSTT</artifactId>
+
+    <parent>
+        <groupId>org.acadrix</groupId>
+        <artifactId>Nora</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <properties>
+        <!-- Existing Properties -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <graal.version>22.3.0</graal.version>
+
+        <!-- Other Properties -->
+        <vosk.version>0.3.45</vosk.version>
+    </properties>
+
+    <dependencies>
+        <!-- Vosk -->
+        <!-- Documentation: https://alphacephei.com/vosk/ -->
+        <!-- Github: https://github.com/alphacep/vosk-api -->
+        <dependency>
+            <groupId>com.alphacephei</groupId>
+            <artifactId>vosk</artifactId>
+            <version>${vosk.version}</version>
+        </dependency>
+
+        <!-- Nora Logger -->
+        <dependency>
+            <groupId>org.acadrix</groupId>
+            <artifactId>nora-logging</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+</project>
