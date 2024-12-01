@@ -3,8 +3,8 @@
 ## Purpose
 Describe the purpose of this documentation update:
 
-* What aspect of the project is being documented?
-* Is this an addition, modification, or correction to existing docs?
+- What aspect of the project is being documented?
+- Is this an addition, modification, or correction to existing docs?
 
 ## Changes Made
 List the main documentation updates:
