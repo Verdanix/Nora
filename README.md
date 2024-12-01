@@ -23,7 +23,7 @@ TODO: Add installation guide
 TODO: Add usage guide
 
 ## Contributing
-TODO: Add contributing guide
+If you are interested in contributing, thank you. Before your first contribution to Nora, please be familiar with the guide on [contributing](./CONTRIBUTING.md). This ensures Nora stays neat and organized for future developers.
 
 ## Credits
 ### TTS
