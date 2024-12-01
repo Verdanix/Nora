@@ -18,3 +18,14 @@ List the main changes implemented:
 Provide any relevant metrics or benchmarks that demonstrate the improvement:
 
 ---
+
+## Related Issues
+If this PR addresses any existing issues, please list them here:
+- #issue-number
+
+## Checklist
+- [ ] Code follows the project's style guidelines
+- [ ] All new and existing tests pass
+- [ ] New unit tests were added if applicable
+- [ ] Documentation was updated if necessary
+
