@@ -26,6 +26,6 @@ If this PR addresses any existing issues, please list them here:
 ## Checklist
 - [ ] Code follows the project's style guidelines
 - [ ] All new and existing tests pass
-- [ ] New unit tests were added if applicable
+- [ ] New unit and integrations tests were added if applicable
 - [ ] Documentation was updated if necessary
-
+- [ ] Tests cover at least 90% of the code if applicable.
