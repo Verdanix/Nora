@@ -3,9 +3,9 @@
 ## Feature Description
 Please describe the feature being added:
 
-* What functionality does this feature introduce?
-* Who will benefit from this feature?
-* Are there any related user stories or requirements documents?
+- What functionality does this feature introduce?
+- Who will benefit from this feature?
+- Are there any related user stories or requirements documents?
 
 ## Implementation Details
 Outline the key components of the implementation:
