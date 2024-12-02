@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <name>Nora</name>
+    <description>
+        Nora is an open-source voice assistant offering customization, flexibility,
+        and control with an easy setup and plugin interface for all users.
+    </description>
+    <version>1.0.0-BETA</version>
+    <groupId>dev.masonroot</groupId>
+    <artifactId>Nora</artifactId>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <inceptionYear>2024</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>GNU GPLv3</name>
+            <url>https://choosealicense.com/licenses/gpl-3.0/</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dependencies -->
+        <testng.version>7.10.2</testng.version>
+
+        <!-- Plugins -->
+        <git-code-format-maven-plugin.version>5.3</git-code-format-maven-plugin.version>
+        <maven.plugins>3.5.2</maven.plugins>
+        <maven.jxr.plugin>3.6.0</maven.jxr.plugin>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Git code format plugin -->
+            <!-- This plugin will format your code on commit and validate it on Maven verify phase -->
+            <!-- Documentation: https://github.com/cosium/git-code-format-maven-plugin -->
+            <plugin>
+                <groupId>com.cosium.code</groupId>
+                <artifactId>git-code-format-maven-plugin</artifactId>
+                <version>${git-code-format-maven-plugin.version}</version>
+                <executions>
+                    <!-- On commit, format the modified files -->
+                    <execution>
+                        <id>install-formatter-hook</id>
+                        <goals>
+                            <goal>install-hooks</goal>
+                        </goals>
+                    </execution>
+                    <!-- On Maven verify phase, fail if any file
+                    (including unmodified) is badly formatted -->
+                    <execution>
+                        <id>validate-code-format</id>
+                        <goals>
+                            <goal>validate-code-format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <!-- Enable https://github.com/google/google-java-format -->
+                    <dependency>
+                        <groupId>com.cosium.code</groupId>
+                        <artifactId>google-java-format</artifactId>
+                        <version>${git-code-format-maven-plugin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Maven Surefire Plugin -->
+            <!-- This plugin is used to run the TestNG tests -->
+            <!-- Documentation: https://maven.apache.org/surefire/maven-surefire-plugin/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.plugins}</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <!-- Maven Surefire Report Plugin -->
+            <!-- This plugin is used to generate the TestNG test reports -->
+            <!-- Documentation: https://maven.apache.org/surefire/maven-surefire-report-plugin/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven.plugins}</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <linkXRef>true</linkXRef>
+                    <outputDirectory>${project.basedir}/target/reports/</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven.jxr.plugin}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
