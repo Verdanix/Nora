@@ -117,7 +117,7 @@
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/main/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
