@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="NoraCoreTestSuite" verbose="1">
-    <test name="logger" preserve-order="true" thread-count="4" parallel="methods">
+    <test name="logger" thread-count="4" parallel="methods">
         <groups>
             <run>
                 <include name="info"/>
