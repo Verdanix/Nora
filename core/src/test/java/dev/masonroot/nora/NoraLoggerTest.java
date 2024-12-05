@@ -7,7 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import lombok.SneakyThrows;
 import org.testng.AssertJUnit;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class NoraLoggerTest {
   private final Path filePath = Paths.get("").toAbsolutePath().resolve("./logs/nora.log");
@@ -60,6 +62,14 @@ public class NoraLoggerTest {
             && fileContents.contains("Test Throwable"));
   }
 
+  @Test(
+      description = "Passing null as the message for info log",
+      expectedExceptions = NullPointerException.class,
+      groups = {"info"})
+  public void testInfoLogNullMessage() {
+    NoraLogger.info(null);
+  }
+
   // WARN TESTS
   @SneakyThrows
   @Test(
@@ -95,6 +105,14 @@ public class NoraLoggerTest {
         fileContents.contains(message)
             && fileContents.contains("Exception")
             && fileContents.contains("Test Throwable"));
+  }
+
+  @Test(
+      description = "Passing null as the message for warn log",
+      expectedExceptions = NullPointerException.class,
+      groups = {"warn"})
+  public void testWarnLogNullMessage() {
+    NoraLogger.warn(null);
   }
 
   // ERROR TESTS
@@ -134,6 +152,14 @@ public class NoraLoggerTest {
             && fileContents.contains("Test Throwable"));
   }
 
+  @Test(
+      description = "Passing null as the message for error log",
+      expectedExceptions = NullPointerException.class,
+      groups = {"error"})
+  public void testErrorLogNullMessage() {
+    NoraLogger.error(null);
+  }
+
   // DEBUG TESTS
   @SneakyThrows
   @Test(
@@ -171,6 +197,14 @@ public class NoraLoggerTest {
             && fileContents.contains("Test Throwable"));
   }
 
+  @Test(
+      description = "Passing null as the message for debug log",
+      expectedExceptions = NullPointerException.class,
+      groups = {"debug"})
+  public void testDebugLogNullMessage() {
+    NoraLogger.debug(null);
+  }
+
   // TRACE TESTS
   @SneakyThrows
   @Test(
@@ -206,5 +240,13 @@ public class NoraLoggerTest {
         fileContents.contains(message)
             && fileContents.contains("Exception")
             && fileContents.contains("Test Throwable"));
+  }
+
+  @Test(
+      description = "Passing null as the message for trace log",
+      expectedExceptions = NullPointerException.class,
+      groups = {"trace"})
+  public void testTraceLogNullMessage() {
+    NoraLogger.trace(null);
   }
 }
