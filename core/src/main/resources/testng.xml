@@ -15,4 +15,22 @@
             <class name="dev.masonroot.nora.NoraLoggerTest"/>
         </classes>
     </test>
+
+    <test name="config" thread-count="4" parallel="methods">
+        <groups>
+            <run>
+                <include name="config_constructor"/>
+                <include name="config__overloaded_constructor"/>
+                <include name="config_creation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="dev.masonroot.nora.config.ConfigManagerTest"/>
+        </classes>
+    </test>
+    <test name="exceptions" thread-count="4" parallel="methods">
+        <classes>
+            <class name="dev.masonroot.nora.exceptions.ConfigManagerExceptionTest"/>
+        </classes>
+    </test>
 </suite>
