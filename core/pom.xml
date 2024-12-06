@@ -17,23 +17,11 @@
     </parent>
 
     <properties>
-        <gestalt.version>0.34.0</gestalt.version>
         <logback.classic.version>1.5.12</logback.classic.version>
         <slf4j.version>2.0.16</slf4j.version>
     </properties>
 
     <dependencies>
-        <!-- Gestalt -->
-        <!-- This dependency adds the ability to use Java property files as configuration files. -->
-        <!-- Github: https://github.com/gestalt-config/gestalt/ -->
-        <!-- Documentation: https://gestalt-config.github.io/gestalt/ -->
-        <dependency>
-            <groupId>com.github.gestalt-config</groupId>
-            <artifactId>gestalt-core</artifactId>
-            <version>${gestalt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Logback Classic -->
         <!-- This dependency adds a logging mechanism utilizing SLF4J Nora -->
         <!-- Github: https://github.com/qos-ch/logback/ -->
