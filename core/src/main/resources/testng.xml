@@ -22,6 +22,7 @@
                 <include name="config_constructor"/>
                 <include name="config__overloaded_constructor"/>
                 <include name="config_creation"/>
+                <include name="config_saving"/>
             </run>
         </groups>
         <classes>
