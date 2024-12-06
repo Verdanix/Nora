@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * </ul>
  */
 @Slf4j
-public class NoraLogger {
+public final class NoraLogger {
   private NoraLogger() {}
 
   /**
