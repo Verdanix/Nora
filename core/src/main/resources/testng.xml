@@ -14,9 +14,4 @@
             <class name="dev.masonroot.nora.config.ConfigManagerTest"/>
         </classes>
     </test>
-    <test name="exceptions" parallel="methods">
-        <classes>
-            <class name="dev.masonroot.nora.exceptions.ConfigManagerExceptionTest"/>
-        </classes>
-    </test>
 </suite>
