@@ -1,11 +1,10 @@
 package dev.masonroot.nora;
 
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import lombok.SneakyThrows;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
@@ -22,7 +21,7 @@ public class NoraLoggerTest {
 
   @BeforeTest(alwaysRun = true)
   public void testLogFileExists() {
-    assertTrue(Files.exists(this.filePath));
+    Assert.assertTrue(Files.exists(this.filePath));
   }
 
   // INFO TESTS

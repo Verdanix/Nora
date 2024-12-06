@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="NoraCoreTestSuite" verbose="1">
-    <test name="logger" thread-count="4" parallel="methods">
+<suite name="NoraCoreTestSuite" verbose="1"  parallel="tests">
+    <test name="logger" parallel="methods">
         <groups>
             <run>
                 <include name="info"/>
@@ -16,7 +16,7 @@
         </classes>
     </test>
 
-    <test name="config" thread-count="4" parallel="methods">
+    <test name="config" parallel="false">
         <groups>
             <run>
                 <include name="config_constructor"/>
@@ -29,7 +29,7 @@
             <class name="dev.masonroot.nora.config.ConfigManagerTest"/>
         </classes>
     </test>
-    <test name="exceptions" thread-count="4" parallel="methods">
+    <test name="exceptions" parallel="methods">
         <classes>
             <class name="dev.masonroot.nora.exceptions.ConfigManagerExceptionTest"/>
         </classes>

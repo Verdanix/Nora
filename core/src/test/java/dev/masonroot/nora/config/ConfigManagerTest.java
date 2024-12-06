@@ -6,28 +6,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import lombok.SneakyThrows;
-import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners({MockitoTestNGListener.class})
 public class ConfigManagerTest {
   private final Path filePath = Paths.get("").toAbsolutePath().resolve("./nora.properties");
   private final Path invalidFilePath = Paths.get("");
   private final ConfigModel model = new ConfigModel();
 
   @SneakyThrows
-  @AfterSuite(alwaysRun = true)
-  public void testSetup() {
-    Files.deleteIfExists(this.filePath);
-  }
-
-  @SneakyThrows
   @BeforeTest(alwaysRun = true)
-  public void testTeardown() {
+  @AfterTest(alwaysRun = true)
+  public void beforeAndAfterFileDeletion() {
     Files.deleteIfExists(this.filePath);
   }
 
