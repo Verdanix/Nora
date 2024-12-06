@@ -15,5 +15,14 @@ jobs:
           mvn clean install
       - name: Test
         run: |
-          mvn clean test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
 

@@ -363,7 +363,7 @@ public final class ConfigManager<T extends Config> {
   }
 
   /**
-   * Reloads the configuration from the configuration file.
+   * Reloads the configuration from the configuration file, creating the file if it does not exist.
    *
    * <p><b>Why:</b>
    *
@@ -396,6 +396,10 @@ public final class ConfigManager<T extends Config> {
    * @throws ConfigManagerException if the configuration file cannot be read
    */
   public synchronized void reload() {
+    if (!this.exists()) {
+      this.create();
+    }
+
     try (InputStream in = Files.newInputStream(this.configPath)) {
 
       Properties newProperties = new Properties();
