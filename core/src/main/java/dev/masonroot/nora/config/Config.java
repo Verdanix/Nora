@@ -15,8 +15,8 @@ import lombok.NonNull;
  * <ul>
  *   <li>The Config interface is essential for maintaining a uniform approach to configuration
  *       management within the Nora application. By defining a standard set of methods, it ensures
- *       that all configuration models can be easily managed, validated, and converted to and from
- *       {@link Properties} objects.
+ *       that all configuration models can be easily managed and converted to and from {@link
+ *       Properties} objects.
  *   <li>This consistency simplifies the process of loading, saving, and validating configuration
  *       data.
  * </ul>
@@ -25,26 +25,24 @@ import lombok.NonNull;
  *
  * <ul>
  *   <li>Implementing classes should provide concrete implementations for the {@link
- *       #setFields(Properties)} and {@link #toProperties()} methods.
- *   <li>The {@link #handleValidity()} method provides a default implementation that does nothing.
- *       Implementing classes can override this method to provide custom validation logic.
+ *       #load(Properties)} and {@link #toProperties()} methods.
  * </ul>
  */
-public interface Config {
+public interface Config<T extends Config<T>> {
   /**
-   * Sets the fields of the configuration model using the provided {@link Properties} object.
+   * Loads the configuration model using the provided {@link Properties} object.
    *
-   * <p>This method is responsible for populating the configuration model with values from the given
+   * <p>This method is responsible for loading the configuration model with values from the given
    * {@link Properties} object. Implementing classes should provide concrete implementations that
    * map the properties to the appropriate fields of the configuration model.
    *
    * <p><b>Why:</b>
    *
    * <ul>
-   *   <li>This method is essential for loading configuration data into the model. By using a {@link
-   *       Properties} object, it allows for a flexible and standardized way of setting
-   *       configuration values, which can be easily loaded from various sources such as files,
-   *       databases, or environment variables.
+   *   <li>This method is essential for initializing the configuration model with values from a
+   *       {@link Properties} object. By using a {@link Properties} object, it allows for a flexible
+   *       and standardized way of setting configuration values, which can be easily loaded from
+   *       various sources such as files, databases, or environment variables.
    * </ul>
    *
    * <p><b>Notes:</b>
@@ -59,9 +57,11 @@ public interface Config {
    *
    * @param properties the {@link Properties} object containing the configuration data; must not be
    *     null. Declared as {@code @NonNull} to ensure that the properties object is provided.
-   * @throws NullPointerException if the properties object is null.
+   * @return the configuration model after loading the properties.
+   * @throws NullPointerException if the properties object passed or returned is null.
    */
-  void setFields(@NonNull final Properties properties);
+  @NonNull
+  T load(@NonNull final Properties properties);
 
   /**
    * Converts the configuration model to a {@link Properties} object.
@@ -94,30 +94,4 @@ public interface Config {
    */
   @NonNull
   Properties toProperties();
-
-  /**
-   * Validates the configuration model after the fields have been set.
-   *
-   * <p>This method is called after {@link #setFields(Properties)} to ensure that the configuration
-   * model is in a valid state. Implementing classes should use the class's fields to perform any
-   * necessary validation checks.
-   *
-   * <p><b>Why:</b>
-   *
-   * <ul>
-   *   <li>This method is essential for ensuring that the configuration data is valid and
-   *       consistent. By performing validation checks, it helps to catch any errors or
-   *       inconsistencies in the configuration data before it is used by the application.
-   * </ul>
-   *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>Implementing classes should provide concrete implementations that check the validity of
-   *       the fields and handle any validation errors appropriately.
-   *   <li>If a field value is invalid, the implementing class should decide how to handle such
-   *       cases, either by logging warnings or providing default values.
-   * </ul>
-   */
-  default void handleValidity() {}
 }
