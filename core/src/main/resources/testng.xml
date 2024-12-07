@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="NoraCoreTestSuite" verbose="1"  parallel="tests">
+    <test name="config" parallel="false">
+        <groups>
+            <run>
+                <include name="config_constructor"/>
+                <include name="config__overloaded_constructor"/>
+                <include name="config_creation"/>
+                <include name="config_saving"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="dev.masonroot.nora.config.ConfigManagerTest"/>
+        </classes>
+    </test>
+</suite>
