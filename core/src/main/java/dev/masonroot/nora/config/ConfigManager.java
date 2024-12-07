@@ -13,10 +13,9 @@ import lombok.NonNull;
 /**
  * Manages the configuration for the application.
  *
- * <p>This class provides methods to create, load, save, and watch configuration files. It uses a
- * generic type parameter {@code T} which extends {@code Config} to handle specific configuration
- * models. The class ensures that the configuration file is created if it does not exist, and it can
- * reload the configuration at runtime if changes are detected.
+ * <p>This class provides methods to create, load, save, and watch configuration files. The class
+ * ensures that the configuration file is created if it does not exist, and it can reload the
+ * configuration at runtime if changes are detected.
  *
  * <p><b>Thread Safety:</b> <br>
  * This class is thread-safe. Methods that modify the configuration are synchronized to ensure
@@ -36,7 +35,7 @@ import lombok.NonNull;
  * <pre>{@code
  * Path configPath = Paths.get("config.properties");
  * MyConfig config = new MyConfig();
- * ConfigManager<MyConfig> configManager = new ConfigManager<>(config, configPath, true);
+ * ConfigManager configManager = new ConfigManager(config, configPath, true);
  * configManager.save();
  * configManager.reload();
  * }</pre>
@@ -48,30 +47,28 @@ import lombok.NonNull;
  *   <li>The {@code @NonNull} annotation indicates that parameters should not be null.
  *   <li>Handle {@code ConfigManagerException} for error scenarios.
  * </ul>
- *
- * @param <T> the type of configuration model extending {@code Config}
  */
 @Getter
-public final class ConfigManager<T extends Config> {
+public final class ConfigManager {
   /**
    * The configuration model instance.
    *
    * <p><b>Why:</b> <br>
-   * This variable holds the specific configuration model that extends {@code Config}. It is used to
-   * manage and manipulate the configuration settings for the application.
+   * This variable holds the configuration model instance, which defines the structure of the
+   * configuration settings. It is used to load, save, and manage the configuration data.
    *
    * <p><b>Performance:</b> <br>
-   * As a final variable, it is initialized once and remains constant, ensuring thread safety and
-   * consistency throughout the application's lifecycle.
+   * As a final variable, it is initialized once and remains constant, ensuring efficient access and
+   * avoiding repeated instantiation.
    *
    * <p><b>Notes:</b> <br>
    *
    * <ul>
    *   <li>This variable should not be null, as indicated by the {@code @NonNull} annotation.
-   *   <li>It is used in various methods to set and validate configuration values.
+   *   <li>The configuration model instance is used to set and retrieve configuration settings.
    * </ul>
    */
-  private final T config;
+  private final Config<?> config;
 
   /**
    * The path to the configuration file.
@@ -136,59 +133,77 @@ public final class ConfigManager<T extends Config> {
   private WatchService watchService;
 
   /**
-   * Constructs a new {@code ConfigManager} with the specified configuration model and configuration
-   * file path with manual reloading only.
+   * Creates a new configuration manager with the specified configuration model and file path.
    *
    * <p><b>Why:</b>
    *
    * <ul>
-   *   <li>This constructor initializes the {@code ConfigManager} with a specific configuration
-   *       model and path to the configuration file.
-   *   <li>It ensures that the configuration file is created if it does not exist and loads the
-   *       configuration from the file.
+   *   <li>This constructor initializes the configuration manager with the provided configuration
+   *       model and file path.
+   *   <li>It allows for the creation of a configuration manager that can manage the configuration
+   *       settings for the application.
    * </ul>
    *
    * <p><b>Notes:</b>
    *
    * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameters should not be null.
+   *   <li>The configuration manager is created with the specified configuration model and file
+   *       path.
+   *   <li>File watching for automatic reloading is disabled by default.
+   * </ul>
+   *
+   * <p><b>Performance:</b>
+   *
+   * <ul>
+   *   <li>Initializing the configuration manager with the configuration model and file path ensures
+   *       that the manager is ready to manage the configuration settings.
+   *   <li>Disabling file watching by default reduces unnecessary overhead when not needed.
    * </ul>
    *
    * @param config the configuration model instance; must not be null
    * @param configPath the path to the configuration file; must not be null
    */
-  public ConfigManager(final T config, final Path configPath) {
+  public ConfigManager(final Config<?> config, final Path configPath) {
     this(config, configPath, false);
   }
 
   /**
-   * Constructs a new {@code ConfigManager} with the specified configuration model, configuration
-   * file path, and file watching option.
+   * Creates a new configuration manager with the specified configuration model, file path and
+   * whether to auto-reload.
    *
    * <p><b>Why:</b>
    *
    * <ul>
-   *   <li>This constructor initializes the {@code ConfigManager} with a specific configuration
-   *       model, path to the configuration file, and an option to enable file watching for
-   *       automatic reloading of the configuration.
-   *   <li>It ensures that the configuration file is created if it does not exist and loads the
-   *       configuration from the file.
+   *   <li>This constructor initializes the configuration manager with the provided configuration
+   *       model and file path.
+   *   <li>It allows for the creation of a configuration manager that can manage the configuration
+   *       settings for the application.
    * </ul>
    *
    * <p><b>Notes:</b>
    *
    * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameters should not be null.
-   *   <li>The {@code reload} parameter determines whether file watching is enabled for automatic
-   *       reloading of the configuration.
+   *   <li>The configuration manager is created with the specified configuration model and file
+   *       path.
+   *   <li>If the {@code reload} parameter is set to {@code true}, the configuration manager will
+   *       start a file watcher to monitor changes to the configuration file.
+   * </ul>
+   *
+   * <p><b>Performance:</b>
+   *
+   * <ul>
+   *   <li>Initializing the configuration manager with the configuration model and file path ensures
+   *       that the manager is ready to manage the configuration settings.
+   *   <li>Starting the file watcher only when necessary reduces unnecessary overhead.
    * </ul>
    *
    * @param config the configuration model instance; must not be null
    * @param configPath the path to the configuration file; must not be null
-   * @param reload whether to enable file watching for automatic reloading of the configuration
+   * @param reload {@code true} to enable file watching for automatic reloading; {@code false}
+   *     otherwise
    */
   public ConfigManager(
-      @NonNull final T config, @NonNull final Path configPath, final boolean reload) {
+      @NonNull final Config<?> config, @NonNull final Path configPath, final boolean reload) {
     this.configPath = configPath;
     this.config = config;
     this.create();
@@ -334,7 +349,6 @@ public final class ConfigManager<T extends Config> {
    *       shutting down.
    *   <li>Efficient handling of file system events reduces the overhead associated with monitoring
    *       file changes.
-   *   <li>Proper synchronization ensures thread safety when accessing the watch service.
    * </ul>
    */
   private void watchForChanges() {
@@ -401,7 +415,6 @@ public final class ConfigManager<T extends Config> {
     }
 
     try (InputStream in = Files.newInputStream(this.configPath)) {
-
       Properties newProperties = new Properties();
       newProperties.load(in);
 
@@ -438,10 +451,6 @@ public final class ConfigManager<T extends Config> {
    * <ul>
    *   <li>This method should be called after the properties object is updated, such as during the
    *       reload process.
-   *   <li>The configuration model's `setFields` and `handleValidity` methods are used to apply and
-   *       validate the new settings.
-   *   <li>Proper synchronization is necessary to ensure thread safety when accessing the
-   *       configuration model.
    * </ul>
    *
    * <p><b>Performance:</b>
@@ -451,13 +460,10 @@ public final class ConfigManager<T extends Config> {
    *       changes are detected.
    *   <li>Efficient handling of the properties object reduces the overhead associated with updating
    *       the configuration model.
-   *   <li>Proper synchronization ensures thread safety and consistency when accessing the
-   *       configuration model.
    * </ul>
    */
   private void setConfigValues() {
-    this.config.setFields(this.properties);
-    this.config.handleValidity();
+    this.config.load(this.properties);
   }
 
   /**
@@ -510,8 +516,6 @@ public final class ConfigManager<T extends Config> {
    * <ul>
    *   <li>Proper synchronization ensures thread safety when accessing the configuration file.
    *   <li>The use of `Files.newOutputStream` ensures efficient writing to the file.
-   *   <li>Validating the configuration model before saving prevents potential runtime errors,
-   *       improving overall application stability.
    * </ul>
    *
    * @throws ConfigManagerException if the configuration file does not exist or cannot be saved
@@ -521,7 +525,6 @@ public final class ConfigManager<T extends Config> {
       throw new ConfigManagerException("Configuration file does not exist: " + this.configPath);
     }
     try (OutputStream out = Files.newOutputStream(this.configPath)) {
-      this.config.handleValidity();
       this.config.toProperties().store(out, null);
     } catch (IOException e) {
       throw new ConfigManagerException("Failed to save configuration", e);

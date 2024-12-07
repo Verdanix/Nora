@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class ConfigManagerTest {
   private final Path filePath = Paths.get("").toAbsolutePath().resolve("./nora.properties");
   private final Path invalidFilePath = Paths.get("");
-  private final ConfigModel model = new ConfigModel();
+  private final ConfigImpl model = new ConfigImpl();
 
   @SneakyThrows
   @BeforeTest(alwaysRun = true)
@@ -29,7 +29,7 @@ public class ConfigManagerTest {
       expectedExceptions = NullPointerException.class,
       groups = {"config_constructor"})
   public void testNullModelConstructorCall() {
-    new ConfigManager<>(null, this.invalidFilePath);
+    new ConfigManager(null, this.invalidFilePath);
   }
 
   @Test(
@@ -37,7 +37,7 @@ public class ConfigManagerTest {
       expectedExceptions = NullPointerException.class,
       groups = {"config_constructor"})
   public void testNullPathConstructorCall() {
-    new ConfigManager<>(this.model, null);
+    new ConfigManager(this.model, null);
   }
 
   @Test(
@@ -45,7 +45,7 @@ public class ConfigManagerTest {
       expectedExceptions = IllegalArgumentException.class,
       groups = {"config_constructor"})
   public void testPathConstructorCall() {
-    new ConfigManager<>(this.model, this.invalidFilePath);
+    new ConfigManager(this.model, this.invalidFilePath);
   }
 
   @Test(
@@ -53,7 +53,7 @@ public class ConfigManagerTest {
       expectedExceptions = IllegalArgumentException.class,
       groups = {"config_constructor"})
   public void testUnReadablePathConstructorCall() {
-    new ConfigManager<>(this.model, this.invalidFilePath);
+    new ConfigManager(this.model, this.invalidFilePath);
   }
 
   // Overloaded Constructor Tests
@@ -62,7 +62,7 @@ public class ConfigManagerTest {
       expectedExceptions = NullPointerException.class,
       groups = {"config__overloaded_constructor"})
   public void testNullModelOverloadedConstructorCall() {
-    new ConfigManager<>(null, this.invalidFilePath, false);
+    new ConfigManager(null, this.invalidFilePath, false);
   }
 
   @Test(
@@ -70,7 +70,7 @@ public class ConfigManagerTest {
       expectedExceptions = NullPointerException.class,
       groups = {"config__overloaded_constructor"})
   public void testNullPathOverloadedConstructorCall() {
-    new ConfigManager<>(this.model, null, false);
+    new ConfigManager(this.model, null, false);
   }
 
   @Test(
@@ -78,7 +78,7 @@ public class ConfigManagerTest {
       expectedExceptions = IllegalArgumentException.class,
       groups = {"config__overloaded_constructor"})
   public void testUnReadablePathOverloadedConstructorCall() {
-    new ConfigManager<>(this.model, this.invalidFilePath, false);
+    new ConfigManager(this.model, this.invalidFilePath, false);
   }
 
   // Create Tests
@@ -89,7 +89,7 @@ public class ConfigManagerTest {
   public void testCreateConfigWithReloadFalse() {
     Files.deleteIfExists(this.filePath);
     Assert.assertFalse(Files.exists(this.filePath));
-    ConfigManager<ConfigModel> manager = new ConfigManager<>(this.model, this.filePath);
+    ConfigManager manager = new ConfigManager(this.model, this.filePath);
     Assert.assertTrue(manager.exists());
   }
 
@@ -97,7 +97,7 @@ public class ConfigManagerTest {
       description = "Creating a new valid configuration file",
       groups = {"config_creation"})
   public void testCreateOverloadedConfigWithReloadFalse() {
-    ConfigManager<ConfigModel> manager = new ConfigManager<>(this.model, this.filePath, true);
+    ConfigManager manager = new ConfigManager(this.model, this.filePath, true);
     Assert.assertTrue(manager.exists());
   }
 
@@ -107,7 +107,7 @@ public class ConfigManagerTest {
       groups = {"config_creation"})
   public void testUnReadableAndWritablePathCreate() {
     // Automatically creates upon constructor call
-    new ConfigManager<>(this.model, this.invalidFilePath);
+    new ConfigManager(this.model, this.invalidFilePath);
   }
 
   // Saving tests
@@ -117,7 +117,7 @@ public class ConfigManagerTest {
       expectedExceptions = ConfigManagerException.class,
       groups = {"config_saving"})
   public void testNonExistentFileSave() {
-    ConfigManager<ConfigModel> manager = new ConfigManager<>(this.model, this.filePath);
+    ConfigManager manager = new ConfigManager(this.model, this.filePath);
     Files.deleteIfExists(this.filePath);
     manager.save();
   }
@@ -128,7 +128,7 @@ public class ConfigManagerTest {
       expectedExceptions = ConfigManagerException.class,
       groups = {"config_saving"})
   public void testSaveCatch() {
-    ConfigManager<ConfigModel> manager = new ConfigManager<>(this.model, this.filePath);
+    ConfigManager manager = new ConfigManager(this.model, this.filePath);
     Field field = manager.getClass().getDeclaredField("configPath");
     field.setAccessible(true);
     field.set(manager, this.invalidFilePath);
@@ -140,7 +140,7 @@ public class ConfigManagerTest {
       description = "Saving a configuration file",
       groups = {"config_saving"})
   public void testSuccessfulSave() {
-    ConfigManager<ConfigModel> manager = new ConfigManager<>(this.model, this.filePath);
+    ConfigManager manager = new ConfigManager(this.model, this.filePath);
     manager.save();
     Assert.assertTrue(Files.exists(this.filePath));
     Assert.assertFalse(Files.readString(this.filePath).isEmpty());
