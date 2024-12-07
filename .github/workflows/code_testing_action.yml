@@ -1,0 +1,28 @@
+name: Code Testing
+run-name: Code Testing
+on: [ push, pull_request ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: graalvm/setup-graalvm@v1
+        with:
+            java-version: '21'
+            distribution: 'graalvm'
+      - name: Install
+        run: |
+          mvn clean install
+      - name: Test
+        run: |
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+          mvn test
+

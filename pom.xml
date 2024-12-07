@@ -7,6 +7,9 @@
         Nora is an open-source voice assistant offering customization, flexibility,
         and control with an easy setup and plugin interface for all users.
     </description>
+    <modules>
+        <module>core</module>
+    </modules>
     <version>1.0.0-BETA</version>
     <groupId>dev.masonroot</groupId>
     <artifactId>Nora</artifactId>
@@ -28,6 +31,8 @@
 
         <!-- Dependencies -->
         <testng.version>7.10.2</testng.version>
+        <lombok.version>1.18.36</lombok.version>
+        <mockito.testng.version>0.5.2</mockito.testng.version>
 
         <!-- Plugins -->
         <git-code-format-maven-plugin.version>5.3</git-code-format-maven-plugin.version>
@@ -44,11 +49,33 @@
     </repositories>
 
     <dependencies>
+        <!-- TestNG -->
+        <!-- This dependency adds testing capabilities to Nora. -->
+        <!-- Github: https://github.com/testng-team/testng/ -->
+        <!-- Documentation: https://testng.org/ -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-testng</artifactId>
+            <version>${mockito.testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <!-- This dependency adds useful annotations to limit the amount of code written. -->
+        <!-- Github: https://github.com/projectlombok/lombok/ -->
+        <!-- Documentation: https://projectlombok.org/ -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -99,7 +126,7 @@
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/main/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
