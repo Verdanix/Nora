@@ -22,24 +22,10 @@
     </properties>
 
     <dependencies>
-        <!-- Logback Classic -->
-        <!-- This dependency adds a logging mechanism utilizing SLF4J Nora -->
-        <!-- Github: https://github.com/qos-ch/logback/ -->
-        <!-- Documentation: https://logback.qos.ch/manual/configuration.html/ -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.classic.version}</version>
-        </dependency>
-
-        <!-- Slf4j -->
-        <!-- This dependency adds a logging facade for Java -->
-        <!-- Github: https://github.com/qos-ch/slf4j/ -->
-        <!-- Documentation: https://www.slf4j.org/ -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>dev.masonroot</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0-BETA</version>
         </dependency>
     </dependencies>
 </project>
