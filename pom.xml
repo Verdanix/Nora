@@ -9,6 +9,7 @@
     </description>
     <modules>
         <module>core</module>
+        <module>common</module>
     </modules>
     <version>1.0.0-BETA</version>
     <groupId>dev.masonroot</groupId>
