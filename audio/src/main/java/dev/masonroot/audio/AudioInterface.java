@@ -52,8 +52,8 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *   <li>The {@code @NonNull} annotation indicates that the parameters should not be null.
    * </ul>
    *
-   * @param microphone the {@code TargetDataLine} for the microphone; must not be null
-   * @param speaker the {@code SourceDataLine} for the speaker; must not be null
+   * @param microphone the {@code TargetDataLine} for the microphone; must not be null.
+   * @param speaker the {@code SourceDataLine} for the speaker; must not be null.
    */
   public AudioInterface(
       @NonNull final TargetDataLine microphone, @NonNull final SourceDataLine speaker) {
@@ -79,7 +79,7 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *   <li>The {@code @NonNull} annotation indicates that the parameter should not be null.
    * </ul>
    *
-   * @param data the audio data to be written to the speaker; must not be null
+   * @param data the audio data to be written to the speaker; must not be null.
    */
   public synchronized void write(@NonNull final byte[] data) {
     try {
@@ -112,8 +112,8 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *   <li>The {@code @NonNull} annotation indicates that the parameter should not be null.
    * </ul>
    *
-   * @param timeoutInMs the maximum time to read audio data in milliseconds; must not be null
-   * @return the audio data read from the microphone as a byte array
+   * @param timeoutInMs the maximum time to read audio data in milliseconds; must not be null.
+   * @return the audio data read from the microphone as a byte array.
    */
   public synchronized byte[] read(final long timeoutInMs) {
     final byte[] data = new byte[this.microphone.getBufferSize() / 5];
