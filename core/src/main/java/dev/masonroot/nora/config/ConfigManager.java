@@ -245,15 +245,15 @@ public final class ConfigManager {
    * @throws ConfigManagerException if the configuration file cannot be created
    */
   public void create() throws ConfigManagerException {
-    if (!this.exists()) {
-      try {
-        Files.createFile(this.configPath);
-      } catch (IOException e) {
-        throw new ConfigManagerException("Failed to create configuration file", e);
-      }
-      return;
+    if (this.exists()) {
+      SecurityUtils.throwIfFileIsInsecure(this.configPath);
     }
-    SecurityUtils.throwIfFileIsInsecure(this.configPath);
+
+    try {
+      Files.createFile(this.configPath);
+    } catch (IOException e) {
+      throw new ConfigManagerException("Failed to create configuration file", e);
+    }
   }
 
   /**
