@@ -9,4 +9,4 @@
  *   <li>To reduce code duplication by centralizing common functionalities.
  * </ul>
  */
-package dev.masonroot.common;
+package dev.masonroot.nora.common;

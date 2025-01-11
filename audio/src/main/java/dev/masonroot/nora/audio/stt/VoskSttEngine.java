@@ -1,9 +1,9 @@
-package dev.masonroot.audio.stt;
+package dev.masonroot.nora.audio.stt;
 
-import dev.masonroot.audio.AudioInterface;
-import dev.masonroot.audio.exceptions.VoskInitializationException;
-import dev.masonroot.common.NoraLogger;
-import dev.masonroot.common.SecurityUtils;
+import dev.masonroot.nora.audio.AudioInterface;
+import dev.masonroot.nora.audio.exceptions.VoskInitializationException;
+import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.SecurityUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import lombok.NonNull;

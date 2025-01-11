@@ -1,10 +1,10 @@
-package dev.masonroot.audio.tts;
+package dev.masonroot.nora.audio.tts;
 
 import com.k2fsa.sherpa.onnx.*;
-import dev.masonroot.audio.AudioInterface;
-import dev.masonroot.audio.exceptions.PiperInitializationException;
-import dev.masonroot.common.NoraLogger;
-import dev.masonroot.common.SecurityUtils;
+import dev.masonroot.nora.audio.AudioInterface;
+import dev.masonroot.nora.audio.exceptions.PiperInitializationException;
+import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.SecurityUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;

@@ -1,4 +1,4 @@
-package dev.masonroot.common;
+package dev.masonroot.nora.common;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

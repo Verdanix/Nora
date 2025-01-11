@@ -1,6 +1,6 @@
-package dev.masonroot.audio;
+package dev.masonroot.nora.audio;
 
-import dev.masonroot.common.NoraLogger;
+import dev.masonroot.nora.common.NoraLogger;
 import java.io.ByteArrayOutputStream;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;

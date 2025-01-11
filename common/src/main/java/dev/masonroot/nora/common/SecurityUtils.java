@@ -1,4 +1,4 @@
-package dev.masonroot.common;
+package dev.masonroot.nora.common;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
