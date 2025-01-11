@@ -1,6 +1,7 @@
 package dev.masonroot.nora.config;
 
 import dev.masonroot.common.NoraLogger;
+import dev.masonroot.common.SecurityUtils;
 import dev.masonroot.nora.exceptions.ConfigManagerException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -252,13 +253,7 @@ public final class ConfigManager {
       }
       return;
     }
-    if (!Files.isReadable(configPath)
-        || !Files.isWritable(configPath)
-        || !Files.isRegularFile(configPath)
-        || Files.isSymbolicLink(configPath)) {
-      throw new IllegalArgumentException(
-          "Config path must be a readable and writable regular file: " + configPath);
-    }
+    SecurityUtils.throwIfFileIsInsecure(this.configPath);
   }
 
   /**
@@ -371,7 +366,7 @@ public final class ConfigManager {
       try {
         watchService.close();
       } catch (IOException e) {
-        throw new ConfigManagerException("Failed to close watch service", e);
+        NoraLogger.warn("Failed to close watch service", e);
       }
     }
   }
