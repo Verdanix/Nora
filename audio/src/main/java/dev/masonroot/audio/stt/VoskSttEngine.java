@@ -1,6 +1,7 @@
 package dev.masonroot.audio.stt;
 
 import dev.masonroot.audio.AudioInterface;
+import dev.masonroot.audio.exceptions.VoskInitializationException;
 import dev.masonroot.common.NoraLogger;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -34,8 +35,13 @@ import org.vosk.Recognizer;
  * </ul>
  */
 public class VoskSttEngine implements SttEngine {
+  /** The audio interface for handling audio input and output. */
   private AudioInterface audioInterface;
+
+  /** The Vosk model used for speech recognition. */
   private Model model;
+
+  /** The Vosk recognizer used for transcribing audio data. */
   private Recognizer recognizer;
 
   /**
@@ -55,6 +61,7 @@ public class VoskSttEngine implements SttEngine {
    *
    * @param audio the {@code AudioInterface} for handling audio input; must not be null.
    * @param modelPath the path to the STT model; must not be null.
+   * @throws VoskInitializationException if the STT engine fails to initialize.
    */
   @Override
   public void initialize(@NonNull final AudioInterface audio, @NonNull final Path modelPath) {
@@ -65,6 +72,7 @@ public class VoskSttEngine implements SttEngine {
       this.recognizer = new Recognizer(this.model, audio.microphone().getFormat().getSampleRate());
     } catch (IOException e) {
       NoraLogger.trace("Failed to load Vosk model.", e);
+      throw new VoskInitializationException(modelPath);
     }
   }
 
@@ -88,21 +96,29 @@ public class VoskSttEngine implements SttEngine {
    */
   @Override
   public synchronized String transcribe(long timeoutInMs) {
-    NoraLogger.info("Transcribing audio...");
     byte[] bytes = this.audioInterface.read(timeoutInMs);
     this.recognizer.acceptWaveForm(bytes, bytes.length);
     return this.trimFinalResult(this.recognizer.getFinalResult());
   }
 
   private String trimFinalResult(String result) {
+    /*
+       Before:
+       {
+         "text": "hello"
+       }
+
+       After:
+       hello
+
+       This regex replaces everything except the text value between the double quotes.
+    */
     return result.replaceAll("(\\{\\s+[\"\\w\\s:\\s]+\\s\"|\"\\s+\\})", "");
   }
 
   @Override
   public void close() throws Exception {
-    if (this.model == null) {
-      return;
-    }
-    this.model.close();
+    if (this.recognizer != null) this.recognizer.close();
+    if (this.model != null) this.model.close();
   }
 }

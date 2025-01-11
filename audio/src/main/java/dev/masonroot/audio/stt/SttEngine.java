@@ -1,6 +1,7 @@
 package dev.masonroot.audio.stt;
 
 import dev.masonroot.audio.AudioInterface;
+import dev.masonroot.audio.exceptions.SttEngineInitializationException;
 import java.nio.file.Path;
 import lombok.NonNull;
 
@@ -41,8 +42,10 @@ public interface SttEngine extends AutoCloseable {
    *
    * @param audio the {@code AudioInterface} for handling audio input; must not be null
    * @param modelPath the path to the STT model; must not be null.
+   * @throws SttEngineInitializationException if the STT engine fails to initialize.
    */
-  void initialize(@NonNull final AudioInterface audio, final Path modelPath);
+  void initialize(@NonNull final AudioInterface audio, final Path modelPath)
+      throws SttEngineInitializationException;
 
   /**
    * Transcribes audio data to text.
