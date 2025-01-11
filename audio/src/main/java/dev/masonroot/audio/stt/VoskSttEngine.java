@@ -35,7 +35,7 @@ import org.vosk.Recognizer;
  *       class.
  * </ul>
  */
-public class VoskSttEngine implements SttEngine {
+public final class VoskSttEngine implements SttEngine {
   /** The audio interface for handling audio input and output. */
   private AudioInterface audioInterface;
 
