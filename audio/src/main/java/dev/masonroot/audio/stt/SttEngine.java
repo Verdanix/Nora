@@ -43,6 +43,7 @@ public interface SttEngine extends AutoCloseable {
    * @param audio the {@code AudioInterface} for handling audio input; must not be null
    * @param modelPath the path to the STT model; must not be null.
    * @throws EngineInitializationException if the STT engine fails to initialize.
+   * @throws NullPointerException if the AudioInterface is null.
    */
   void initialize(@NonNull final AudioInterface audio, final Path modelPath)
       throws EngineInitializationException;

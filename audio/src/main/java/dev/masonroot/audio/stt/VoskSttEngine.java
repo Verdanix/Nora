@@ -45,25 +45,6 @@ public final class VoskSttEngine implements SttEngine {
   /** The Vosk recognizer used for transcribing audio data. */
   private Recognizer recognizer;
 
-  /**
-   * Initializes the STT engine with the specified audio interface and model path.
-   *
-   * <p><b>Why:</b>
-   *
-   * <ul>
-   *   <li>To set up the necessary resources for speech-to-text conversion.
-   * </ul>
-   *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameters should not be null.
-   * </ul>
-   *
-   * @param audio the {@code AudioInterface} for handling audio input; must not be null.
-   * @param modelPath the path to the STT model; must not be null.
-   * @throws VoskInitializationException if the STT engine fails to initialize.
-   */
   @Override
   public void initialize(@NonNull final AudioInterface audio, @NonNull final Path modelPath) {
     LibVosk.setLogLevel(LogLevel.INFO);
@@ -78,24 +59,6 @@ public final class VoskSttEngine implements SttEngine {
     }
   }
 
-  /**
-   * Transcribes audio data to text.
-   *
-   * <p><b>Why:</b>
-   *
-   * <ul>
-   *   <li>To convert spoken language into written text.
-   * </ul>
-   *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>The method should handle any necessary audio processing and transcription logic.
-   * </ul>
-   *
-   * @param timeoutInMs the timeout in milliseconds for reading audio data.
-   * @return the transcribed text.
-   */
   @Override
   public synchronized String transcribe(long timeoutInMs) {
     byte[] bytes = this.audioInterface.read(timeoutInMs);
@@ -103,6 +66,27 @@ public final class VoskSttEngine implements SttEngine {
     return this.trimFinalResult(this.recognizer.getFinalResult());
   }
 
+  /**
+   * Trims the final result from the Vosk recognizer to extract the recognized text.
+   *
+   * <p>This method removes the JSON structure from the result string, leaving only the recognized
+   * text. For example, it transforms:
+   *
+   * <pre>
+   * {
+   *   "text": "hello"
+   * }
+   * </pre>
+   *
+   * <p>into:
+   *
+   * <pre>
+   * hello
+   * </pre>
+   *
+   * @param result the JSON string containing the recognized text
+   * @return the extracted text from the JSON result
+   */
   private String trimFinalResult(String result) {
     /*
        Before:
