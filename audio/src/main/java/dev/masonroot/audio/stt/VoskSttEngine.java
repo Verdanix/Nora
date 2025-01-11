@@ -3,6 +3,7 @@ package dev.masonroot.audio.stt;
 import dev.masonroot.audio.AudioInterface;
 import dev.masonroot.audio.exceptions.VoskInitializationException;
 import dev.masonroot.common.NoraLogger;
+import dev.masonroot.common.SecurityUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import lombok.NonNull;
@@ -66,6 +67,7 @@ public class VoskSttEngine implements SttEngine {
   @Override
   public void initialize(@NonNull final AudioInterface audio, @NonNull final Path modelPath) {
     LibVosk.setLogLevel(LogLevel.INFO);
+    SecurityUtils.throwIfFileIsInsecure(modelPath);
     this.audioInterface = audio;
     try {
       this.model = new Model(modelPath.toString());
