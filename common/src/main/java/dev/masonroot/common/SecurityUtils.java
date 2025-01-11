@@ -2,6 +2,7 @@ package dev.masonroot.common;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import lombok.NonNull;
 
 /**
  * Security utilities for different operations.
@@ -40,12 +41,36 @@ public class SecurityUtils {
    * @param file the file to check; must not be null.
    * @throws SecurityException if the file is insecure.
    */
-  public static void throwIfFileIsInsecure(Path file) {
+  public static void throwIfFileIsInsecure(@NonNull final Path file) {
     if (!Files.isReadable(file)
         || !Files.isWritable(file)
         || !Files.isRegularFile(file)
         || Files.isSymbolicLink(file)) {
       throw new SecurityException("File is not secure: " + file);
+    }
+  }
+
+  /**
+   * Checks if the file is a directory.
+   *
+   * <p><b>Why:</b>
+   *
+   * <ul>
+   *   <li>To ensure that the file is a directory.
+   * </ul>
+   *
+   * <p><b>Notes:</b>
+   *
+   * <ul>
+   *   <li>The {@code @NonNull} annotation indicates that the parameter should not be null.
+   * </ul>
+   *
+   * @param file the file to check; must not be null.
+   * @throws SecurityException if the file is not a directory.
+   */
+  public static void throwIfIsNotDirectory(@NonNull final Path file) {
+    if (!Files.isDirectory(file)) {
+      throw new SecurityException("File is not a directory: " + file);
     }
   }
 }

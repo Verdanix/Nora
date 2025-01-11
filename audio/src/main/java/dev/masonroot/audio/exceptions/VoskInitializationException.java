@@ -15,7 +15,7 @@ import java.nio.file.Path;
  *       information related to Vosk initialization.
  * </ul>
  */
-public class VoskInitializationException extends SttEngineInitializationException {
+public final class VoskInitializationException extends EngineInitializationException {
   /**
    * Constructs a new {@code VoskInitializationException} with the specified model path.
    *

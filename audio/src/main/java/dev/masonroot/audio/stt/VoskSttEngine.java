@@ -67,7 +67,7 @@ public class VoskSttEngine implements SttEngine {
   @Override
   public void initialize(@NonNull final AudioInterface audio, @NonNull final Path modelPath) {
     LibVosk.setLogLevel(LogLevel.INFO);
-    SecurityUtils.throwIfFileIsInsecure(modelPath);
+    SecurityUtils.throwIfIsNotDirectory(modelPath);
     this.audioInterface = audio;
     try {
       this.model = new Model(modelPath.toString());
