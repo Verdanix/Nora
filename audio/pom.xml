@@ -19,20 +19,37 @@
     <properties>
         <logback.classic.version>1.5.12</logback.classic.version>
         <slf4j.version>2.0.16</slf4j.version>
+        <vosk.version>0.3.45</vosk.version>
     </properties>
 
 
     <dependencies>
+        <!-- Common module -->
+        <!-- This dependency adds Nora's common module -->
         <dependency>
             <groupId>dev.masonroot</groupId>
             <artifactId>common</artifactId>
             <version>LATEST</version>
         </dependency>
 
+        <!-- Sherpa ONNX -->
+        <!-- This dependency adds TTS -->
+        <!-- Github: https://github.com/k2-fsa/sherpa-onnx/ -->
+        <!-- Documentation: https://k2-fsa.github.io/sherpa/onnx/ -->
         <dependency>
             <groupId>com.k2fsa.sherpa.onnx</groupId>
             <artifactId>sherpa-onnx</artifactId>
             <version>${sherpa.onnx.version}</version>
+        </dependency>
+
+        <!-- Vosk STT Engine -->
+        <!-- This dependency adds STT using Vosk -->
+        <!-- Github: https://github.com/alphacep/vosk-api/ -->
+        <!-- Documentation: https://alphacephei.com/vosk/ -->
+        <dependency>
+            <groupId>com.alphacephei</groupId>
+            <artifactId>vosk</artifactId>
+            <version>${vosk.version}</version>
         </dependency>
     </dependencies>
 </project>
