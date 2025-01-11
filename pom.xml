@@ -10,6 +10,7 @@
     <modules>
         <module>core</module>
         <module>common</module>
+        <module>audio</module>
     </modules>
     <version>1.0.0-BETA</version>
     <groupId>dev.masonroot</groupId>
@@ -42,6 +43,9 @@
         <maven.jxr.plugin>3.6.0</maven.jxr.plugin>
         <maven.install.plugin.version>3.1.3</maven.install.plugin.version>
         <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+
+        <!-- Other -->
+        <sherpa.install.path>${project.build.directory}/lib/sherpa-onnx.jar</sherpa.install.path>
     </properties>
 
     <repositories>
@@ -172,7 +176,7 @@
                 <executions>
                     <execution>
                         <id>download-sherpa</id>
-                        <phase>generate-sources</phase>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -182,7 +186,7 @@
                     <target>
                         <mkdir dir="${project.build.directory}/lib"/>
                         <get src="https://github.com/k2-fsa/sherpa-onnx/releases/download/v${sherpa.onnx.version}/sherpa-onnx-v${sherpa.onnx.version}-java17.jar"
-                             dest="${project.build.directory}/lib/sherpa-onnx.jar"/>
+                             dest="${sherpa.install.path}"/>
                     </target>
                 </configuration>
             </plugin>
@@ -200,12 +204,12 @@
                         <id>install-sherpa</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>install</goal>
+                            <goal>install-file</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/lib/sherpa-onnx.jar</file>
+                    <file>${sherpa.install.path}</file>
                     <groupId>com.k2fsa.sherpa.onnx</groupId>
                     <artifactId>sherpa-onnx</artifactId>
                     <version>${sherpa.onnx.version}</version>
