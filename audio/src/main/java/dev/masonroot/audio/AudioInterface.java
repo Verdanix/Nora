@@ -46,12 +46,6 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *       lines.
    * </ul>
    *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameters should not be null.
-   * </ul>
-   *
    * @param microphone the {@code TargetDataLine} for the microphone; must not be null.
    * @param speaker the {@code SourceDataLine} for the speaker; must not be null.
    */
@@ -62,10 +56,10 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
   }
 
   /**
-   * Writes the specified audio data to the speaker.
+   * Writes audio data to the speaker.
    *
-   * <p>This method opens the speaker line, starts it, writes the provided audio data to it, and
-   * then stops and drains the line. It ensures that the audio data is played through the speaker.
+   * <p>This method opens the speaker line, starts it, and writes the audio data to the speaker. It
+   * ensures that the audio data is played through the speaker.
    *
    * <p><b>Why:</b>
    *
@@ -73,32 +67,26 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *   <li>To facilitate audio output by writing audio data to the speaker.
    * </ul>
    *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameter should not be null.
-   * </ul>
-   *
-   * @param data the audio data to be written to the speaker; must not be null.
+   * @param data the audio data to write to the speaker as a byte array.
    */
   public synchronized void write(@NonNull final byte[] data) {
     try {
-      this.speaker.open();
+      if (!this.speaker.isOpen()) {
+        this.speaker.open();
+      }
       this.speaker.start();
       this.speaker.write(data, 0, data.length);
     } catch (IllegalArgumentException | IllegalStateException | LineUnavailableException e) {
       NoraLogger.trace("Failed to write audio data to speaker.", e);
-    } finally {
-      this.speaker.stop();
-      this.speaker.drain();
     }
   }
 
   /**
-   * Reads audio data from the microphone for the specified timeout duration.
+   * Reads audio data from the microphone for the specified duration.
    *
-   * <p>This method opens the microphone line, starts it, and reads audio data into a buffer until
-   * the specified timeout duration is reached. It then stops and drains the line.
+   * <p>This method opens the microphone line, starts it, reads audio data from it for the specified
+   * duration, and then returns the audio data as a byte array. It ensures that the audio data is
+   * captured from the microphone.
    *
    * <p><b>Why:</b>
    *
@@ -106,13 +94,7 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    *   <li>To facilitate audio input by reading audio data from the microphone.
    * </ul>
    *
-   * <p><b>Notes:</b>
-   *
-   * <ul>
-   *   <li>The {@code @NonNull} annotation indicates that the parameter should not be null.
-   * </ul>
-   *
-   * @param timeoutInMs the maximum time to read audio data in milliseconds; must not be null.
+   * @param timeoutInMs the duration in milliseconds to read audio data from the microphone.
    * @return the audio data read from the microphone as a byte array.
    */
   public synchronized byte[] read(final long timeoutInMs) {
@@ -121,7 +103,9 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
     long elapsedTime = 0;
 
     try {
-      this.microphone.open();
+      if (!this.microphone.isOpen()) {
+        this.microphone.open();
+      }
       this.microphone.start();
       final long startTime = System.currentTimeMillis();
       while (elapsedTime < timeoutInMs) {
@@ -129,19 +113,15 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
         out.write(data, 0, bytesRead);
         elapsedTime = System.currentTimeMillis() - startTime;
       }
-
     } catch (IllegalArgumentException | IllegalStateException | LineUnavailableException e) {
       NoraLogger.trace("Failed to read audio data from microphone.", e);
-    } finally {
-      this.microphone.stop();
-      this.microphone.drain();
     }
     return out.toByteArray();
   }
 
   @Override
   public void close() throws Exception {
-    this.microphone.close();
-    this.speaker.close();
+    if (this.microphone.isOpen()) this.microphone.close();
+    if (this.speaker.isOpen()) this.speaker.close();
   }
 }
