@@ -39,6 +39,6 @@ public class EngineInitializationException extends RuntimeException {
   public EngineInitializationException(
       @NonNull final String message, @NonNull final Throwable cause) {
     super(message, cause);
-    NoraLogger.trace(message, cause);
+    NoraLogger.trace(message);
   }
 }

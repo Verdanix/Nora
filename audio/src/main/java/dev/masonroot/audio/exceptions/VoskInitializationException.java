@@ -37,6 +37,6 @@ public final class VoskInitializationException extends EngineInitializationExcep
    */
   public VoskInitializationException(Path modelPath, Throwable cause) {
     super("Failed to initialize Vosk engine with model path: " + modelPath, cause);
-    NoraLogger.trace(super.getMessage(), cause);
+    NoraLogger.trace(super.getMessage());
   }
 }
