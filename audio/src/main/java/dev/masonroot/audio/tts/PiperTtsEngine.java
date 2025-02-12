@@ -168,4 +168,9 @@ public final class PiperTtsEngine implements TtsEngine {
     byte[] bytes = this.convertFloatSamplesToBytes(generatedAudio.getSamples());
     this.audio.write(bytes);
   }
+
+  @Override
+  public void close() {
+    this.tts.release();
+  }
 }

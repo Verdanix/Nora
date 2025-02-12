@@ -28,7 +28,7 @@ import lombok.NonNull;
  *       {@link #speak}, and {@link #saveToFile} methods.
  * </ul>
  */
-public interface TtsEngine {
+public interface TtsEngine extends AutoCloseable {
   /**
    * Initializes the TTS engine with the specified audio interface and data directory.
    *
