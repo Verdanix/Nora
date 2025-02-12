@@ -29,7 +29,7 @@ import lombok.NonNull;
  *       class.
  * </ul>
  */
-public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
+public final record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
     implements AutoCloseable {
 
   /**
@@ -99,7 +99,7 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
    */
   public synchronized byte[] read(final long timeoutInMs) {
     final byte[] data = new byte[this.microphone.getBufferSize() / 5];
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    final ByteArrayOutputStream out = new ByteArrayOutputStream();
     long elapsedTime = 0;
 
     try {
@@ -121,7 +121,7 @@ public record AudioInterface(TargetDataLine microphone, SourceDataLine speaker)
 
   @Override
   public void close() throws Exception {
-    if (this.microphone.isOpen()) this.microphone.close();
-    if (this.speaker.isOpen()) this.speaker.close();
+    this.microphone.close();
+    this.speaker.close();
   }
 }
