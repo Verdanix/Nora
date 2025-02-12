@@ -103,7 +103,7 @@ public final class VoskSttEngine implements SttEngine {
   }
 
   @Override
-  public void close() throws Exception {
+  public void close() {
     if (this.recognizer != null) this.recognizer.close();
     if (this.model != null) this.model.close();
   }
