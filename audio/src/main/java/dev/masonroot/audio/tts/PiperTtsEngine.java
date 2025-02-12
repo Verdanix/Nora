@@ -57,7 +57,7 @@ public final class PiperTtsEngine implements TtsEngine {
       Files.createDirectories(piperDir.resolve("data"));
     } catch (IOException e) {
       NoraLogger.trace("Was unable to create piper directory");
-      throw new PiperInitializationException(dataDirectory.resolve("piper"));
+      throw new PiperInitializationException(dataDirectory.resolve("piper"), e);
     }
 
     this.checkPiperFileSecurity(piperDir);
