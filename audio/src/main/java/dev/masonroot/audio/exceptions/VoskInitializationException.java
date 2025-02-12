@@ -17,7 +17,7 @@ import java.nio.file.Path;
  */
 public final class VoskInitializationException extends EngineInitializationException {
   /**
-   * Constructs a new {@code VoskInitializationException} with the specified model path.
+   * Constructs a new {@code VoskInitializationException} with the specified model path and cause.
    *
    * <p><b>Why:</b>
    *
@@ -32,8 +32,9 @@ public final class VoskInitializationException extends EngineInitializationExcep
    * </ul>
    *
    * @param modelPath the path to the Vosk model; must not be null.
+   * @param cause the cause of the exception; must not be null.
    */
-  public VoskInitializationException(Path modelPath) {
-    super("Failed to initialize Vosk engine with model path: " + modelPath);
+  public VoskInitializationException(Path modelPath, Throwable cause) {
+    super("Failed to initialize Vosk engine with model path: " + modelPath, cause);
   }
 }

@@ -16,8 +16,9 @@ import java.nio.file.Path;
  * </ul>
  */
 public final class PiperInitializationException extends EngineInitializationException {
+
   /**
-   * Constructs a new {@code EngineInitialization} with the specified detail message.
+   * Constructs a new {@code EngineInitialization} with the specified detail message and cause.
    *
    * <p><b>Why:</b>
    *
@@ -32,8 +33,9 @@ public final class PiperInitializationException extends EngineInitializationExce
    * </ul>
    *
    * @param dataDirectory the path to the data directory; must not be null.
+   * @param cause the cause of the exception; must not be null.
    */
-  public PiperInitializationException(Path dataDirectory) {
-    super("Failed to initialize Piper engine with data directory: " + dataDirectory);
+  public PiperInitializationException(Path dataDirectory, Throwable cause) {
+    super("Failed to initialize Piper engine with data directory: " + dataDirectory, cause);
   }
 }

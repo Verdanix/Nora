@@ -55,7 +55,7 @@ public final class VoskSttEngine implements SttEngine {
       this.recognizer = new Recognizer(this.model, audio.microphone().getFormat().getSampleRate());
     } catch (IOException e) {
       NoraLogger.trace("Failed to load Vosk model.", e);
-      throw new VoskInitializationException(modelPath);
+      throw new VoskInitializationException(modelPath, e);
     }
   }
 
