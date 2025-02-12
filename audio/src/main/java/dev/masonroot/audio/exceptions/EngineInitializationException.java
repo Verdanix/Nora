@@ -1,5 +1,7 @@
 package dev.masonroot.audio.exceptions;
 
+import lombok.NonNull;
+
 /**
  * Exception thrown when an engine fails to initialize.
  *
@@ -30,8 +32,11 @@ public class EngineInitializationException extends RuntimeException {
    * </ul>
    *
    * @param message the detail message; must not be null.
+   * @param cause the cause of the exception; must not be null.
+   * @throws NullPointerException if the message is null.
    */
-  public EngineInitializationException(String message) {
-    super(message);
+  public EngineInitializationException(
+      @NonNull final String message, @NonNull final Throwable cause) {
+    super(message, cause);
   }
 }
