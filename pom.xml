@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependencies -->
-        <testng.version>7.10.2</testng.version>
+        <testng.version>7.11.0</testng.version>
         <lombok.version>1.18.36</lombok.version>
         <mockito.testng.version>0.5.2</mockito.testng.version>
 
