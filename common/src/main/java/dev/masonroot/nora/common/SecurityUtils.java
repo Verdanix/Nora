@@ -1,5 +1,6 @@
 package dev.masonroot.nora.common;
 
+import dev.masonroot.nora.common.lang.Translator;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import lombok.NonNull;
@@ -46,7 +47,8 @@ public class SecurityUtils {
         || !Files.isWritable(file)
         || !Files.isRegularFile(file)
         || Files.isSymbolicLink(file)) {
-      throw new SecurityException("File is not secure: " + file);
+      throw new SecurityException(
+          String.format("%s: %s", Translator.translate("common.exceptions.insecureFile"), file));
     }
   }
 
@@ -70,7 +72,8 @@ public class SecurityUtils {
    */
   public static void throwIfIsNotDirectory(@NonNull final Path file) {
     if (!Files.isDirectory(file)) {
-      throw new SecurityException("File is not a directory: " + file);
+      throw new SecurityException(
+          String.format("%s: %s", Translator.translate("common.exceptions.notDirectory"), file));
     }
   }
 }
