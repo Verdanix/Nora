@@ -1,0 +1,12 @@
+2025-02-47-21:02:51 [main] [DEBUG]: suiteXmlPath: "/home/mroot/development/ide/intellij-idea-ultimate/projects/Nora/common/src/main/resources/testng.xml"
+2025-02-47-21:02:51 [main] [INFO]: [XmlSuite] [WARN] 'parallel' value 'false' is no longer valid, defaulting to 'none'.
+2025-02-47-21:03:34 [main] [DEBUG]: suiteXmlPath: "/home/mroot/development/ide/intellij-idea-ultimate/projects/Nora/common/src/main/resources/testng.xml"
+2025-02-47-21:03:34 [main] [INFO]: [XmlSuite] [WARN] 'parallel' value 'false' is no longer valid, defaulting to 'none'.
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ADDING NODE TranslatorTest.testNonExistentKey()[pri:0, instance:dev.masonroot.nora.common.lang.TranslatorTest@45d84a20] -1696001071
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ADDING NODE TranslatorTest.testUkEnglish()[pri:0, instance:dev.masonroot.nora.common.lang.TranslatorTest@45d84a20] -319611623
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ADDING NODE TranslatorTest.testUsEnglish()[pri:0, instance:dev.masonroot.nora.common.lang.TranslatorTest@45d84a20] 251630369
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ADDING NODE TranslatorTest.testSetInvalidLocale()[pri:0, instance:dev.masonroot.nora.common.lang.TranslatorTest@45d84a20] -1549070304
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ================ SORTING
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] =============== DONE SORTING
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ====== SORTED NODES
+2025-02-47-21:03:34 [main] [TRACE]: [Graph] ====== END SORTED NODES

@@ -1,4 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="CommonTestSuite" verbose="1"  parallel="tests">
+    <test name="common" parallel="false">
+        <groups>
+            <run>
+                <include name="translator"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="dev.masonroot.nora.common.lang.TranslatorTest"/>
+        </classes>
+    </test>
 </suite>
