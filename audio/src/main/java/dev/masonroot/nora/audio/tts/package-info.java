@@ -8,4 +8,4 @@
  *   <li>To allow for easy integration with different TTS engines.
  * </ul>
  */
-package dev.masonroot.audio.tts;
+package dev.masonroot.nora.audio.tts;

@@ -9,4 +9,4 @@
  *   <li>To provide a thread-safe interface for reading and writing audio data.
  * </ul>
  */
-package dev.masonroot.audio;
+package dev.masonroot.nora.audio;
