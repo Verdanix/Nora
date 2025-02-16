@@ -13,8 +13,8 @@
         <module>audio</module>
     </modules>
     <version>1.0.0-BETA</version>
-    <groupId>dev.masonroot</groupId>
-    <artifactId>Nora</artifactId>
+    <groupId>dev.masonroot.nora</groupId>
+    <artifactId>nora</artifactId>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <inceptionYear>2025</inceptionYear>
@@ -68,6 +68,10 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Mockito TestNG -->
+        <!-- This dependency adds mocking capabilities to Nora. -->
+        <!-- Github: https://github.com/mockito/mockito-testng/ -->
+        <!-- Documentation: https://site.mockito.org/ -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-testng</artifactId>

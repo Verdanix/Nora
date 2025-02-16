@@ -2,17 +2,17 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <name>Core</name>
+    <name>core</name>
     <description>
         The main module with the full functionality of Nora.
     </description>
-    <artifactId>Core</artifactId>
+    <artifactId>core</artifactId>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>dev.masonroot</groupId>
-        <artifactId>Nora</artifactId>
+        <groupId>dev.masonroot.nora</groupId>
+        <artifactId>nora</artifactId>
         <version>1.0.0-BETA</version>
     </parent>
 
@@ -23,7 +23,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>dev.masonroot</groupId>
+            <groupId>dev.masonroot.nora</groupId>
             <artifactId>common</artifactId>
             <version>1.0.0-BETA</version>
         </dependency>

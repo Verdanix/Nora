@@ -11,8 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>dev.masonroot</groupId>
-        <artifactId>Nora</artifactId>
+        <groupId>dev.masonroot.nora</groupId>
+        <artifactId>nora</artifactId>
         <version>1.0.0-BETA</version>
     </parent>
 
@@ -27,9 +27,9 @@
         <!-- Common module -->
         <!-- This dependency adds Nora's common module -->
         <dependency>
-            <groupId>dev.masonroot</groupId>
+            <groupId>dev.masonroot.nora</groupId>
             <artifactId>common</artifactId>
-            <version>LATEST</version>
+            <version>1.0.0-BETA</version>
         </dependency>
 
         <!-- Sherpa ONNX -->

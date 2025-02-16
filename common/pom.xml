@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <name>Common</name>
+    <name>common</name>
     <description>
         The common module with all the common components of Nora.
     </description>
@@ -11,8 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>dev.masonroot</groupId>
-        <artifactId>Nora</artifactId>
+        <groupId>dev.masonroot.nora</groupId>
+        <artifactId>nora</artifactId>
         <version>1.0.0-BETA</version>
     </parent>
 
