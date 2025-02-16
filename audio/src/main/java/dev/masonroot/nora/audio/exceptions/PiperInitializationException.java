@@ -1,6 +1,7 @@
 package dev.masonroot.nora.audio.exceptions;
 
 import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.lang.Translator;
 import java.nio.file.Path;
 
 /**
@@ -37,7 +38,11 @@ public final class PiperInitializationException extends EngineInitializationExce
    * @param cause the cause of the exception; must not be null.
    */
   public PiperInitializationException(Path dataDirectory, Throwable cause) {
-    super("Failed to initialize Piper engine with data directory: " + dataDirectory, cause);
+    super(
+        String.format(
+            "%s: %s",
+            Translator.translate("audio.exceptions.piperInitializationException"), dataDirectory),
+        cause);
     NoraLogger.trace(super.getMessage());
   }
 }

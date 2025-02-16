@@ -1,6 +1,7 @@
 package dev.masonroot.nora.audio;
 
 import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.lang.Translator;
 import java.io.ByteArrayOutputStream;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
@@ -77,7 +78,7 @@ public final record AudioInterface(TargetDataLine microphone, SourceDataLine spe
       this.speaker.start();
       this.speaker.write(data, 0, data.length);
     } catch (IllegalArgumentException | IllegalStateException | LineUnavailableException e) {
-      NoraLogger.trace("Failed to write audio data to speaker.", e);
+      NoraLogger.trace(Translator.translate("audio.exceptions.speakerWriteError"), e);
     }
   }
 
@@ -114,7 +115,7 @@ public final record AudioInterface(TargetDataLine microphone, SourceDataLine spe
         elapsedTime = System.currentTimeMillis() - startTime;
       }
     } catch (IllegalArgumentException | IllegalStateException | LineUnavailableException e) {
-      NoraLogger.trace("Failed to read audio data from microphone.", e);
+      NoraLogger.trace(Translator.translate("audio.exceptions.micReadError"), e);
     }
     return out.toByteArray();
   }

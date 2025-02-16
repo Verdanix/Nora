@@ -2,7 +2,9 @@ package dev.masonroot.nora.audio.stt;
 
 import dev.masonroot.nora.audio.AudioInterface;
 import dev.masonroot.nora.audio.exceptions.VoskInitializationException;
+import dev.masonroot.nora.common.NoraLogger;
 import dev.masonroot.nora.common.SecurityUtils;
+import dev.masonroot.nora.common.lang.Translator;
 import java.io.IOException;
 import java.nio.file.Path;
 import lombok.NonNull;
@@ -50,6 +52,7 @@ public final class VoskSttEngine implements SttEngine {
     SecurityUtils.throwIfIsNotDirectory(modelPath);
     this.audioInterface = audio;
     try {
+      NoraLogger.info(Translator.translate("audio.vosk.initializing"));
       this.model = new Model(modelPath.toString());
       this.recognizer = new Recognizer(this.model, audio.microphone().getFormat().getSampleRate());
     } catch (IOException e) {
@@ -59,6 +62,7 @@ public final class VoskSttEngine implements SttEngine {
 
   @Override
   public synchronized String transcribe(long timeoutInMs) {
+    NoraLogger.info(Translator.translate("audio.vosk.transcribing"));
     byte[] bytes = this.audioInterface.read(timeoutInMs);
     this.recognizer.acceptWaveForm(bytes, bytes.length);
     return this.trimFinalResult(this.recognizer.getFinalResult());
