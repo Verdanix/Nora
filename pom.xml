@@ -48,14 +48,6 @@
         <sherpa.install.path>${project.build.directory}/lib/sherpa-onnx.jar</sherpa.install.path>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <name>bintray</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- TestNG -->
         <!-- This dependency adds testing capabilities to Nora. -->
