@@ -1,6 +1,7 @@
 package dev.masonroot.nora.audio.exceptions;
 
 import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.lang.Translator;
 import java.nio.file.Path;
 
 /**
@@ -36,7 +37,11 @@ public final class VoskInitializationException extends EngineInitializationExcep
    * @param cause the cause of the exception; must not be null.
    */
   public VoskInitializationException(Path modelPath, Throwable cause) {
-    super("Failed to initialize Vosk engine with model path: " + modelPath, cause);
+    super(
+        String.format(
+            "%s: %s",
+            Translator.translate("audio.exceptions.voskInitializationException"), modelPath),
+        cause);
     NoraLogger.trace(super.getMessage());
   }
 }
