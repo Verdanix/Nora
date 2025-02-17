@@ -1,7 +1,7 @@
-package dev.masonroot.audio.stt;
+package dev.masonroot.nora.audio.stt;
 
-import dev.masonroot.audio.AudioInterface;
-import dev.masonroot.audio.exceptions.EngineInitializationException;
+import dev.masonroot.nora.audio.AudioInterface;
+import dev.masonroot.nora.audio.exceptions.EngineInitializationException;
 import java.nio.file.Path;
 import lombok.NonNull;
 

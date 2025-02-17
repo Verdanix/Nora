@@ -8,4 +8,4 @@
  *   <li>To provide meaningful error messages and facilitate debugging.
  * </ul>
  */
-package dev.masonroot.audio.exceptions;
+package dev.masonroot.nora.audio.exceptions;

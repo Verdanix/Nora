@@ -1,4 +1,4 @@
-package dev.masonroot.audio.exceptions;
+package dev.masonroot.nora.audio.exceptions;
 
 import dev.masonroot.common.NoraLogger;
 import java.nio.file.Path;

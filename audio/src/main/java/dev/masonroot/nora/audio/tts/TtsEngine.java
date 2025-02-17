@@ -1,6 +1,6 @@
-package dev.masonroot.audio.tts;
+package dev.masonroot.nora.audio.tts;
 
-import dev.masonroot.audio.AudioInterface;
+import dev.masonroot.nora.audio.AudioInterface;
 import java.nio.file.Path;
 import lombok.NonNull;
 

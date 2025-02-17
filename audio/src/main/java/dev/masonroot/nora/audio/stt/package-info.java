@@ -8,4 +8,4 @@
  *   <li>To allow for easy integration with different STT engines.
  * </ul>
  */
-package dev.masonroot.audio.stt;
+package dev.masonroot.nora.audio.stt;
