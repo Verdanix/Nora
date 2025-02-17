@@ -1,7 +1,7 @@
 package dev.masonroot.nora.config;
 
-import dev.masonroot.common.NoraLogger;
-import dev.masonroot.common.SecurityUtils;
+import dev.masonroot.nora.common.NoraLogger;
+import dev.masonroot.nora.common.SecurityUtils;
 import dev.masonroot.nora.exceptions.ConfigManagerException;
 import java.io.IOException;
 import java.io.InputStream;
