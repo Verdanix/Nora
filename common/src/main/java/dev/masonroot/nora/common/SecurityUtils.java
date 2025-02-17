@@ -73,7 +73,8 @@ public class SecurityUtils {
   public static void throwIfIsNotDirectory(@NonNull final Path file) {
     if (!Files.isDirectory(file)) {
       throw new SecurityException(
-          String.format("%s: %s", Translator.translate("common.exceptions.notDirectory"), file));
+          String.format(
+              "%s: %s", Translator.translate("common.exceptions.pathNotDirectory"), file));
     }
   }
 }
