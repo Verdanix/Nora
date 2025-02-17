@@ -2,7 +2,6 @@ package dev.masonroot.nora.audio.stt;
 
 import dev.masonroot.nora.audio.AudioInterface;
 import dev.masonroot.nora.audio.exceptions.VoskInitializationException;
-import dev.masonroot.nora.common.NoraLogger;
 import dev.masonroot.nora.common.SecurityUtils;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -54,7 +53,6 @@ public final class VoskSttEngine implements SttEngine {
       this.model = new Model(modelPath.toString());
       this.recognizer = new Recognizer(this.model, audio.microphone().getFormat().getSampleRate());
     } catch (IOException e) {
-      NoraLogger.trace("Failed to load Vosk model.", e);
       throw new VoskInitializationException(modelPath, e);
     }
   }

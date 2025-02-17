@@ -3,7 +3,6 @@ package dev.masonroot.nora.audio.tts;
 import com.k2fsa.sherpa.onnx.*;
 import dev.masonroot.nora.audio.AudioInterface;
 import dev.masonroot.nora.audio.exceptions.PiperInitializationException;
-import dev.masonroot.nora.common.NoraLogger;
 import dev.masonroot.nora.common.SecurityUtils;
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +55,6 @@ public final class PiperTtsEngine implements TtsEngine {
     try {
       Files.createDirectories(piperDir.resolve("data"));
     } catch (IOException e) {
-      NoraLogger.trace("Was unable to create piper directory");
       throw new PiperInitializationException(dataDirectory.resolve("piper"), e);
     }
 
