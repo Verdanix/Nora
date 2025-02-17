@@ -1,7 +1,6 @@
 package dev.masonroot.nora.config;
 
 import dev.masonroot.nora.common.NoraLogger;
-import dev.masonroot.nora.common.SecurityUtils;
 import dev.masonroot.nora.exceptions.ConfigManagerException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -245,14 +244,21 @@ public final class ConfigManager {
    * @throws ConfigManagerException if the configuration file cannot be created
    */
   public void create() throws ConfigManagerException {
-    if (this.exists()) {
-      SecurityUtils.throwIfFileIsInsecure(this.configPath);
+    if (!this.exists()) {
+      try {
+        Files.createFile(this.configPath);
+      } catch (IOException e) {
+        throw new ConfigManagerException("Failed to create configuration file", e);
+      }
+      return;
     }
 
-    try {
-      Files.createFile(this.configPath);
-    } catch (IOException e) {
-      throw new ConfigManagerException("Failed to create configuration file", e);
+    if (!Files.isReadable(configPath)
+        || !Files.isWritable(configPath)
+        || !Files.isRegularFile(configPath)
+        || Files.isSymbolicLink(configPath)) {
+      throw new IllegalArgumentException(
+          "Config path must be a readable and writable regular file: " + configPath);
     }
   }
 

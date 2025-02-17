@@ -1,6 +1,6 @@
 package dev.masonroot.nora.audio.exceptions;
 
-import dev.masonroot.common.NoraLogger;
+import dev.masonroot.nora.common.NoraLogger;
 import lombok.NonNull;
 
 /**
