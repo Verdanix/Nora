@@ -42,7 +42,7 @@
         <maven.plugins>3.5.3</maven.plugins>
         <maven.jxr.plugin>3.6.0</maven.jxr.plugin>
         <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
-        <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+        <maven.antrun.plugin.version>3.2.0</maven.antrun.plugin.version>
 
         <!-- Other -->
         <sherpa.install.path>${project.build.directory}/lib/sherpa-onnx.jar</sherpa.install.path>
